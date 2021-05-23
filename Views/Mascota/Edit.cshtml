@@ -1,0 +1,97 @@
+@model Mascota
+@{
+    ViewData["Title"] = "Details";
+    Layout = "~/Views/Shared/_layout.cshtml";
+}
+
+<br>
+<h2 class="text-success">Editar datos la mascota</h2>
+<br>
+
+<form method="post" asp-action="Edit" id="formEditMascota">
+    <div class="container">
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Id" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Id" readonly class="form-control">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Nombre" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Nombre" class="form-control">
+                 <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Edad" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Edad" class="form-control">
+                 <span asp-validation-for="Edad" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-4">
+                <label asp-for="Dueño" class="col-form-label"></label>
+            </div>
+            <div class="col-3">
+                <input asp-for="Dueño" class="form-control">
+                 <span asp-validation-for="Dueño" class="text-danger"></span>
+            </div>
+        </div>
+        <div class="form-group-row">
+            <div class="row">
+                <div class="col-3">
+                    @* <input type="submit"    asp-asp-routeid="@Model" class="btn btn-success form-control"  value="Actualizar Datos"/> *@
+                       
+                    <button
+                        asp-asp-routeid="@Model"
+                        class="btn btn-success form-control"
+                        id="btnEditMascota"
+                    >
+                        <i class="far fa-edit"></i> 
+                        Actualizar Datos
+                    </button>
+                </div>
+                <div class="col-3">
+                    <a asp-action="Index" asp-controller="Mascota" class="btn btn-info form-control">
+                        Volver a la lista de mascotas
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</form>
+
+<script>
+    $(function () {
+
+        $("#btnEditMascota").click(function (e) {
+            e.preventDefault()
+            Swal.fire({
+             title: 'Desea Actualizar los Datos de Mascota?',
+             showDenyButton: true,
+             confirmButtonText: `Guardar Cambios`,
+             denyButtonText: `Cancelar`,
+             }).then((result) => {
+             /* Read more about isConfirmed, isDenied below */
+             if (result.isConfirmed) {
+                 Swal.fire('Editado  con Exito!', '', 'success')
+                 $("#formEditMascota").submit();
+             } else if (result.isDenied) {
+                 Swal.fire('Cambios no realizados', '', 'info')
+             }
+             })
+        })
+    });
+</script>
