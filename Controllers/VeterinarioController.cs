@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using MvcVeterinaria.Data;
 using MvcVeterinaria.Models;
 
+
 namespace MvcVeterinaria.Controllers
 {
     public class VeterinarioController : Controller
@@ -18,11 +19,27 @@ namespace MvcVeterinaria.Controllers
         {
             _context = context;
         }
+        // public ActionResult Inprimir()  
+        //     {  
+        //     var report = new Rotativa.ActionAsPdf("Index");  
+        //     return report;  
+        //     } 
+
+        // public async Task<IActionResult> Pdf(){
+        //     return new ViewAsPdf("Pdf",await _context.Veterinario.ToListAsync());
+        // }
+
 
         // GET: Veterinario
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(string Busqueda)
         {
-            return View(await _context.Veterinario.ToListAsync());
+            var veterinarios = from m in _context.Veterinario select m;
+            if (!String.IsNullOrEmpty(Busqueda))
+            {
+
+                veterinarios = veterinarios.Where(s => s.Nombre.Contains(Busqueda));
+            }
+            return View(await veterinarios.ToListAsync());
         }
 
         // GET: Veterinario/Details/5
@@ -54,7 +71,7 @@ namespace MvcVeterinaria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Nombre,Especialidad,Experiencia")] Veterinario veterinario)
+        public async Task<IActionResult> Create([Bind("Id,Nombre,Especialidad,Experiencia,GradoAcademico")] Veterinario veterinario)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +103,7 @@ namespace MvcVeterinaria.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Especialidad,Experiencia")] Veterinario veterinario)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Nombre,Especialidad,Experiencia,GradoAcademico")] Veterinario veterinario)
         {
             if (id != veterinario.Id)
             {

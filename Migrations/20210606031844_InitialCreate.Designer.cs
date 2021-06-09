@@ -8,7 +8,7 @@ using MvcVeterinaria.Data;
 namespace MvcVeterinaria.Migrations
 {
     [DbContext(typeof(MvcVeterinariaContext))]
-    [Migration("20210527210119_InitialCreate")]
+    [Migration("20210606031844_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -28,6 +28,9 @@ namespace MvcVeterinaria.Migrations
 
                     b.Property<int>("Experiencia")
                         .HasColumnType("INTEGER");
+
+                    b.Property<string>("GradoAcademico")
+                        .HasColumnType("TEXT");
 
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");

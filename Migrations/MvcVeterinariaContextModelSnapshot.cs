@@ -27,6 +27,9 @@ namespace MvcVeterinaria.Migrations
                     b.Property<int>("Experiencia")
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("GradoAcademico")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Nombre")
                         .HasColumnType("TEXT");
 

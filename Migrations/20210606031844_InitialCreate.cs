@@ -14,7 +14,8 @@ namespace MvcVeterinaria.Migrations
                         .Annotation("Sqlite:Autoincrement", true),
                     Nombre = table.Column<string>(type: "TEXT", nullable: true),
                     Especialidad = table.Column<string>(type: "TEXT", nullable: true),
-                    Experiencia = table.Column<int>(type: "INTEGER", nullable: false)
+                    Experiencia = table.Column<int>(type: "INTEGER", nullable: false),
+                    GradoAcademico = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
