@@ -48,6 +48,22 @@ namespace MvcVeterinaria.Controllers
             mascota.Dueño = ListaMascotas[pos].Dueño;
 
         }
+        public List<string> obtenerNombres(){
+             List<string> nom =new List<string>();
+             string name="no hay nada";
+
+             for (var i = 0; i < ListaMascotas.Count(); i++)
+             { 
+
+                 name = ListaMascotas[i].Nombre.ToString();
+                 nom.Add(name);
+                 
+             }
+
+             
+             return nom;
+        }
+
 
         public IActionResult Details(int Id)
         {

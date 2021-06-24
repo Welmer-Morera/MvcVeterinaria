@@ -10,5 +10,7 @@ namespace MvcVeterinaria.Data{
         {
         }
        public DbSet<Veterinario> Veterinario {get; set;}
+       public DbSet<Medicamento> Medicamento { get; set; }
+       public DbSet<Cita> Cita { get; set; }
     }
 }

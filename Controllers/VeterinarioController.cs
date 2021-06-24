@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using MvcVeterinaria.Data;
 using MvcVeterinaria.Models;
-
+using Rotativa.AspNetCore;
 
 namespace MvcVeterinaria.Controllers
 {
@@ -19,16 +19,7 @@ namespace MvcVeterinaria.Controllers
         {
             _context = context;
         }
-        // public ActionResult Inprimir()  
-        //     {  
-        //     var report = new Rotativa.ActionAsPdf("Index");  
-        //     return report;  
-        //     } 
-
-        // public async Task<IActionResult> Pdf(){
-        //     return new ViewAsPdf("Pdf",await _context.Veterinario.ToListAsync());
-        // }
-
+       
 
         // GET: Veterinario
         public async Task<IActionResult> Index(string Busqueda)
@@ -40,6 +31,14 @@ namespace MvcVeterinaria.Controllers
                 veterinarios = veterinarios.Where(s => s.Nombre.Contains(Busqueda));
             }
             return View(await veterinarios.ToListAsync());
+        }
+        public async Task<IActionResult> ReportG (){
+            var lista =await _context.Veterinario.ToListAsync();
+
+            return  new ViewAsPdf("ReportG",lista){
+                PageSize =Rotativa.AspNetCore.Options.Size.Letter,
+                //FileName ="ReporteGeneral.pdf"
+            };
         }
 
         // GET: Veterinario/Details/5
@@ -58,6 +57,23 @@ namespace MvcVeterinaria.Controllers
             }
 
             return View(veterinario);
+        }
+        public async Task<IActionResult> ReportD ( int? id){
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var veterinario = await _context.Veterinario
+                .FirstOrDefaultAsync(m => m.Id == id);
+            if (veterinario == null)
+            {
+                return NotFound();
+            }
+            return  new ViewAsPdf(veterinario){
+                PageSize =Rotativa.AspNetCore.Options.Size.Letter,
+                FileName ="ReporteIndividual.pdf"
+            };
         }
 
         // GET: Veterinario/Create

@@ -1,0 +1,50 @@
+@model IEnumerable<MvcVeterinaria.Models.Veterinario>
+@{
+    Layout =null;
+}
+  <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+<h1>Lista Veterinarios</h1>
+
+
+<div class="row text-center">
+</div>
+<table class="table table -striped border">
+    <thead class="table-primary">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Especialidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Experiencia)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.GradoAcademico)
+            </th>
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Especialidad)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Experiencia)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.GradoAcademico)
+                </td>
+
+            </tr>
+        }
+    </tbody>
+</table>
